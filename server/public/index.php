@@ -4,6 +4,7 @@ use Phalcon\Loader;
 use Phalcon\Mvc\Micro;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Db\Adapter\Pdo\Mysql as PdoMysql;
+use Phalcon\Http\Response;
 
 $loader = new Loader();
 $loader->registerNamespaces(
@@ -50,8 +51,7 @@ $app->get(
     $phql = "SELECT id, name, age FROM App\Models\Candidates ORDER BY age";
     $candidates = $app
       ->modelsManager
-      ->executeQuery($phql)
-    ;
+      ->executeQuery($phql);
 
     $data = [];
 
@@ -69,6 +69,70 @@ $app->get(
     header('Content-type: application/vnd.api+json'); // JSON API
     echo json_encode(['data' => $data]);
   }
+);
+
+$app->post(
+    '/api/applicants',
+    function () use ($app) {
+        $applicantPayload = $app->request->getJsonRawBody();
+        $applicantAttributes = $applicantPayload->data->attributes;
+
+        $name = $applicantAttributes->name;
+        $age = $applicantAttributes->age;
+
+        $phql = "INSERT INTO App\Models\Candidates (name, age) VALUES (:name:, :age:)";
+
+        $status = $app
+          ->modelsManager
+          ->executeQuery(
+                $phql,
+                [
+                    'age' => $age,
+                    'name' => $name,
+                ]
+            );
+
+        $response = new Response();
+
+        if ($status->success() === true) {
+            $response->setStatusCode(201, 'Created');
+
+            $response->setHeader(
+                'Content-Type',
+                'application/vnd.api+json',
+            );
+
+            $response->setJsonContent(
+                [
+                    'data' => [
+                      'type' => 'applicant',
+                      'id' => $status->getModel()->id,
+                      'attributes' => [
+                        'name' => $name,
+                        'age' => $age,
+                      ]
+                  ],
+                ]
+            );
+        } else {
+            // Generic error handler
+            $response->setStatusCode(400, 'Bad Request');
+            $errors = [];
+
+            foreach ($status->getMessages() as $message) {
+                $errors[] = $message->getMessage();
+            }
+
+            $response->setJsonContent(
+                [
+                    'status' => 'ERROR',
+                    'messages' => $errors,
+                ]
+            );
+        }
+
+        return $response;
+    }
 );
 
 $app->handle($_SERVER['REQUEST_URI']);
