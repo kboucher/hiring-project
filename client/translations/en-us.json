@@ -1,15 +1,25 @@
 {
     "buttons": {
-        "add_new": "Add new"
+        "add_new": "Add new",
+        "cancel": "Cancel",
+        "save": "Save"
     },
     "chrome": {
         "site_title": "Smith &amp; Carson"
     },
+    "helper_text": {
+        "applicant_form": {
+            "age_input": "Applicant's age in years",
+            "name_input": "Applicant's full name"
+        }
+    },
     "labels": {
         "age": "Age",
-        "name": "Name"
+        "name": "Name",
+        "required": "(required)"
     },
     "page_titles": {
+        "candidate": "Candidate",
         "candidates": "Candidates"
     },
     "status_messages": {

@@ -2,10 +2,12 @@ import EmberRouter from '@ember/routing/router';
 import config from 'client/config/environment';
 
 export default class Router extends EmberRouter {
-  location = config.locationType;
-  rootURL = config.rootURL;
+    location = config.locationType;
+    rootURL = config.rootURL;
 }
 
 Router.map(function () {
-  this.route('candidates', { path: '/' });
+    this.route('candidates', { path: '/' }, function () {
+        this.route('candidate', { path: ':id' });
+    });
 });

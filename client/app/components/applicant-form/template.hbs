@@ -1,0 +1,79 @@
+<form
+    class="mt-3"
+    data-test-form="applicant"
+    id={{this.formId}}
+    {{on "submit" @onSubmit}}
+>
+    <div class="mb-3">
+        <label
+            class="form-label"
+            for={{this.nameInputId}}
+        >
+            {{t "labels.name"}}
+            {{t "labels.required"}}
+        </label>
+        <Input
+            aria-describedby="nameHelp"
+            class="form-control"
+            data-test-input="applicant-name"
+            id={{this.nameInputId}}
+            required={{true}}
+            type="text"
+            @value={{@applicantName}}
+            {{on "blur" (fn this.markAsTouched this.nameInputId)}}
+        />
+        <div
+            class="form-text"
+            id="nameHelp"
+        >
+            {{t "helper_text.applicant_form.name_input"}}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label
+            class="form-label"
+            for={{this.ageInputId}}
+        >
+            {{t "labels.age"}}
+            {{t "labels.required"}}
+        </label>
+        <Input
+            aria-describedby="ageHelp"
+            class="form-control"
+            data-test-input="applicant-age"
+            id={{this.ageInputId}}
+            min="15"
+            max="100"
+            required={{true}}
+            @type="number"
+            @value={{@applicantAge}}
+            {{on "blur" (fn this.markAsTouched this.ageInputId)}}
+        />
+        <div
+            class="form-text"
+            id="ageHelp"
+        >
+            {{t "helper_text.applicant_form.age_input"}}
+        </div>
+    </div>
+
+    <div class="btn-group mt-3">
+        <button
+            class="btn btn-outline-dark"
+            data-test-button="cancel"
+            type="button"
+            {{on "click" @onCancel}}
+        >
+            {{t "buttons.cancel"}}
+        </button>
+        <button
+            class="btn btn-dark"
+            data-test-button="save"
+            disabled={{not this.isFormValid}}
+            type="submit"
+        >
+            {{t "buttons.save"}}
+        </button>
+    </div>
+</form>

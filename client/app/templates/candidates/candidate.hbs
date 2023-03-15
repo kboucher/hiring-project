@@ -1,0 +1,10 @@
+{{page-title (t "page_titles.candidate")}}
+
+<h1>{{t "page_titles.candidate"}}</h1>
+
+<ApplicantForm
+    @applicantAge={{this.model.age}}
+    @applicantName={{this.model.name}}
+    @onCancel={{this.onCancel}}
+    @onSubmit={{this.onSubmit}}
+/>

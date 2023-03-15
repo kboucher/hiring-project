@@ -1,7 +1,5 @@
 {{page-title (t "page_titles.candidates")}}
 
-{{outlet}}
-
 <h1 class="h2">{{t "page_titles.candidates"}}</h1>
 
 <table class="table">
@@ -25,9 +23,10 @@
     </tbody>
 </table>
 
-<button
+<LinkTo
     class="btn btn-dark"
-    {{on "click" this.addNew}}
+    @route="candidates.candidate"
+    @model="new"
 >
     {{t "buttons.add_new"}}
-</button>
+</LinkTo>
