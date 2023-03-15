@@ -1,5 +1,17 @@
-{{page-title "Client"}}
+{{page-title "Candidates"}}
 
-{{link-to 'Candidates' 'candidates'}}
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Smith &amp; Carson</span>
+    </div>
+</nav>
 
-{{outlet}}
+{{!--
+    Candidates is now the default route
+
+    {{link-to "Candidates" "candidates"}}
+ --}}
+
+<div class="container">
+    {{outlet}}
+</div>
