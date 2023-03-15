@@ -1,0 +1,18 @@
+{
+    "buttons": {
+        "add_new": "Add new"
+    },
+    "chrome": {
+        "site_title": "Smith &amp; Carson"
+    },
+    "labels": {
+        "age": "Age",
+        "name": "Name"
+    },
+    "page_titles": {
+        "candidates": "Candidates"
+    },
+    "status_messages": {
+        "no_records_found": "No records found"
+    }
+}

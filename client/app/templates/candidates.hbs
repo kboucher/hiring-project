@@ -1,15 +1,33 @@
-{{page-title "Candidates"}}
+{{page-title (t "page_titles.candidates")}}
+
 {{outlet}}
 
-<h1>Listing candidates</h1>
+<h1 class="h2">{{t "page_titles.candidates"}}</h1>
 
-{{#each model as |applicant|}}
-<div>
-  <h2>{{applicant.name}}</h2>
-  <p>Age: {{applicant.name}}</p>
-</div>
-{{else}}
-<div>No records found</div>
-{{/each}}
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{t "labels.name"}}</th>
+            <th>{{t "labels.age"}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each model as |applicant|}}
+            <tr>
+                <td>{{applicant.name}}</td>
+                <td>{{applicant.age}}</td>
+            </tr>
+        {{else}}
+            <tr>
+                <td colspan="2">{{t "status_messages.no_records_found"}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
 
-<button {{on 'click' (action 'addNew')}} >Add new</button>
+<button
+    class="btn btn-dark"
+    {{on "click" this.addNew}}
+>
+    {{t "buttons.add_new"}}
+</button>
