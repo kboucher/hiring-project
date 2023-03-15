@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { next } from '@ember/runloop';
 import { inject as service } from '@ember/service';
 
 /**
@@ -37,8 +38,13 @@ export default class CandidatesCandidateController extends Controller {
         model
             .save()
             .then((/* applicant */) => {
-                // TODO: Handle success
-                router.transitionTo('candidates');
+                // TODO: Handle success?
+
+                this.send('refreshModel');
+
+                next(() => {
+                    router.transitionTo('candidates');
+                });
             })
             .catch((/* error */) => {
                 // TODO: Handle error
