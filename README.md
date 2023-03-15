@@ -1,5 +1,4 @@
-Hiring Project Exercise
-=======================
+# Hiring Project Exercise
 
 The project is a super simple API done in [phalcon](https://phalcon.io/en-us)
 and an [ember.js](https://emberjs.com/) frontend app.
@@ -43,7 +42,7 @@ npm start
 
 You will be able to see the app running in the browser with http://localhost:4200/
 
-# HOMEWORK
+## HOMEWORK
 
 What you need to do, is implement the add new candidate from the front end and backend.
 
@@ -56,4 +55,4 @@ from the @action defined in app/controllers/candidates.js you can use the variab
 a new applicant record using this.store.createRecord and then save it.
 
 On the back end, you need to implement `$app->post('/api/applicants', function () use ($app) {});` that will receive the data
-in json:api format 
+in json:api format
